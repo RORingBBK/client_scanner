@@ -15,4 +15,5 @@ group :test do
   gem "rspec", "~> 3.0"
   gem "rubocop-rake", "~> 0.1"
   gem "rubocop-rspec", "~> 1.0"
+  gem "simplecov", "~> 0.21"
 end
