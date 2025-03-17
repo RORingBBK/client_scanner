@@ -10,3 +10,6 @@ coverage
 
 # rspec failure tracking
 .rspec_status
+
+# Project specific vscode settings
+.vscode
