@@ -1,7 +1,9 @@
-RSpec.describe Commands::BaseCommand, type: :command do
-  let(:store) { double("Store") }
+# frozen_string_literal: true
 
+RSpec.describe Commands::BaseCommand, type: :command do
   subject(:command) { described_class.new(store) }
+
+  let(:store) { double("Store") }
 
   describe "#initialize" do
     it "initialized with the store" do
