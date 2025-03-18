@@ -32,11 +32,17 @@ RSpec.describe ClientScanner do
   end
 
   describe "when options does not exist" do
+    let(:usage_output) do
+      <<~USAGE
+        Usage: bin/client_scanner [options]
+            -f, --file FILE                  Path to the file
+            -s, --search QUERY               Search for a query
+      USAGE
+    end
+
     it "prompts with usage" do
       result = `bin/client_scanner`
-      expect(result).to include("Usage: bin/client_scanner [options]")
-      expect(result).to include("-f, --file FILE")
-      expect(result).to include("-s, --search QUERY")
+      expect(result).to eq(usage_output)
     end
   end
 end
