@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 RSpec.describe Commands::SearchCommand, type: :command do
+  subject(:command) { described_class.new(store, query) }
+
   let(:store) { double("Store") }
   let(:query) { "John" }
-
-  subject(:command) { described_class.new(store, query) }
 
   describe "#initialize" do
     it "initializes with a store and a query" do
