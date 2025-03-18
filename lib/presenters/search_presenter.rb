@@ -1,4 +1,6 @@
 module Presenters
+  # SearchPresenter is responsible for formatting and
+  # presenting the search results in a readable format.
   class SearchPresenter
     def initialize(results)
       @results = results
