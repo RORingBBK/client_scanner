@@ -10,6 +10,9 @@ require_relative "presenters/search_presenter"
 module ClientScanner
   class Error < StandardError; end
 
+  # CLI is the main entry point for the client scanner application
+  # which is responsible for parsing command line arguments, processing
+  # options, and executing the appropriate command.
   class CLI
     def initialize(
       parser: OptionParser.new,
