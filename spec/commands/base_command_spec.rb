@@ -3,7 +3,7 @@
 RSpec.describe Commands::BaseCommand, type: :command do
   subject(:command) { described_class.new(store) }
 
-  let(:store) { double("Store") }
+  let(:store) { instance_double(Stores::ClientStore) }
 
   describe "#initialize" do
     it "initialized with the store" do
