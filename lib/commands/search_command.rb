@@ -12,7 +12,7 @@ module Commands
     end
 
     def execute
-      @results = @store.search_by_name(@query)
+      @store.search_by_name(@query)
     end
   end
 end
