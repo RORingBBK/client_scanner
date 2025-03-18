@@ -3,7 +3,7 @@
 RSpec.describe Commands::SearchCommand, type: :command do
   subject(:command) { described_class.new(store, query) }
 
-  let(:store) { double("Store") }
+  let(:store) { instance_double(Store) }
   let(:query) { "John" }
 
   describe "#initialize" do
