@@ -1,7 +1,9 @@
-RSpec.describe Stores::ClientStore, type: :store do
-  let(:file_path) { "data/clients.json" }
+# frozen_string_literal: true
 
+RSpec.describe Stores::ClientStore, type: :store do
   subject(:store) { described_class.new(file_path) }
+
+  let(:file_path) { "data/clients.json" }
 
   describe "#load_data" do
     context "when the file exists" do
@@ -19,7 +21,7 @@ RSpec.describe Stores::ClientStore, type: :store do
         allow(File).to receive(:read).with(file_path).and_return(json_data)
       end
 
-      it "should load the data and parse it as JSON" do
+      it "loads the data and parse it as JSON" do
         expect(store.instance_variable_get(:@data)).to eq([{ full_name: "John Doe", email: "john@example.com" }])
       end
     end
@@ -30,7 +32,7 @@ RSpec.describe Stores::ClientStore, type: :store do
         allow(File).to receive(:exist?).with(file_path).and_return(false)
       end
 
-      it "should output an error message and set data to an empty array" do
+      it "outputs an error message and set data to an empty array" do
         expect { store }.to output("Error: File #{file_path} not found\n").to_stdout
         expect(store.instance_variable_get(:@data)).to eq([])
       end
@@ -44,7 +46,7 @@ RSpec.describe Stores::ClientStore, type: :store do
         allow(File).to receive(:read).and_raise(StandardError, "File read error")
       end
 
-      it "should output an error message and set data to an empty array" do
+      it "outputs an error message and set data to an empty array" do
         expect { store }.to output("Error: File read error\n").to_stdout
         expect(store.instance_variable_get(:@data)).to eq([])
       end
@@ -52,13 +54,13 @@ RSpec.describe Stores::ClientStore, type: :store do
   end
 
   describe "#search_by_name" do
+    subject { store.search_by_name(name) }
+
     let(:data) do
       [
         { full_name: "John Doe", email: "john@example.com" }
       ]
     end
-
-    subject { store.search_by_name(name) }
 
     before do
       store.instance_variable_set(:@data, data)
