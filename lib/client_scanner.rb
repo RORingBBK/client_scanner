@@ -11,7 +11,16 @@ module ClientScanner
   class Error < StandardError; end
 
   class CLI
-    def initialize
+    def initialize(
+      parser: OptionParser.new,
+      store_class: Stores::ClientStore,
+      search_command: Commands::SearchCommand,
+      presenter: Presenters::SearchPresenter
+    )
+      @parser = parser
+      @store_class = store_class
+      @search_command = search_command
+      @presenter = presenter
       @options = {}
     end
 
