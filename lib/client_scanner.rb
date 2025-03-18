@@ -55,7 +55,7 @@ module ClientScanner
       end
     end
 
-    def execute_search
+    def execute_search(store)
       results = @search_command.new(store, @options[:search]).execute
       puts @presenter.new(results).present
     end
