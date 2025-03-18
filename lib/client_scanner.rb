@@ -29,6 +29,16 @@ module ClientScanner
       end
 
       parser.parse!(argv)
+
+      file_path = @options[:file] || "data/clients.json"
+      store = Stores::ClientStore.new(file_path)
+
+      if @options[:search]
+        results = Commands::SearchCommand.new(store, @options[:search]).execute
+        puts Presenters::SearchPresenter.new(results).present
+      else
+        puts parser
+      end
     end
   end
 end
