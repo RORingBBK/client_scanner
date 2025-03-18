@@ -2,6 +2,8 @@ require_relative "base_store"
 require "json"
 
 module Stores
+  # ClientStore is responsible for loading client data from the file and providing
+  # search functionality based on client names
   class ClientStore < BaseStore
     def load_data
       if File.exist?(@file_path)
