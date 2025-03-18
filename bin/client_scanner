@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Make sure ruby loads the gem's lib folder
+$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), ".."))
+
+require "lib/client_scanner"
+
+ClientScanner::CLI.new.run(ARGV)
