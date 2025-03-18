@@ -15,5 +15,9 @@ module Stores
       puts "Error: #{e.message}"
       @data = []
     end
+
+    def search_by_name(query)
+      @data.select { |record| record[:full_name].include?(query.to_s.downcase) }
+    end
   end
 end
