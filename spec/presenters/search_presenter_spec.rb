@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Presenters::SearchPresenter, type: :presenter do
   describe "#present" do
     subject { described_class.new(results).present }
