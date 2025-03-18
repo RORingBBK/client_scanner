@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Stores
   # BaseStore serves as an abstract class for all store classes.
   # It provides a common interface and requires subclasses to implement the `load_data` method.

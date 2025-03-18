@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Presenters
   # SearchPresenter is responsible for formatting and
   # presenting the search results in a readable format.
