@@ -27,16 +27,7 @@ module ClientScanner
     def run(argv)
       setup_parser
       @parser.parse!(argv)
-
-      file_path = @options[:file] || "data/clients.json"
-      store = Stores::ClientStore.new(file_path)
-
-      if @options[:search]
-        results = Commands::SearchCommand.new(store, @options[:search]).execute
-        puts Presenters::SearchPresenter.new(results).present
-      else
-        puts parser
-      end
+      process_options
     end
 
     private
@@ -51,6 +42,22 @@ module ClientScanner
       @parser.on("-s FIELD QUERY", "--search QUERY", "Search for a query") do |query|
         @options[:search] = query
       end
+    end
+
+    def process_options
+      file_path = @options[:file] || "data/clients.json"
+      store = @store_class.new(file_path)
+
+      if @options[:search]
+        execute_search(store)
+      else
+        puts @parser
+      end
+    end
+
+    def execute_search
+      results = @search_command.new(store, @options[:search]).execute
+      puts @presenter.new(results).present
     end
   end
 end
