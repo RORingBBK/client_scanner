@@ -3,7 +3,7 @@
 RSpec.describe Commands::SearchCommand, type: :command do
   subject(:command) { described_class.new(store, query) }
 
-  let(:store) { instance_double(Store) }
+  let(:store) { instance_double(Stores::ClientStore) }
   let(:query) { "John" }
 
   describe "#initialize" do
@@ -18,7 +18,7 @@ RSpec.describe Commands::SearchCommand, type: :command do
       let(:results) { [{ name: "John", email: "john@example.com" }] }
 
       it "calls search_by_name on the store with the query" do
-        expect(store).to receive(:search_by_name).with(query).and_return(results)
+        allow(store).to receive(:search_by_name).with(query).and_return(results)
         expect(command.execute).to eq(results)
       end
     end
@@ -27,7 +27,7 @@ RSpec.describe Commands::SearchCommand, type: :command do
       let(:results) { [] }
 
       it "calls search_by_name on the store with the query and returns empty array" do
-        expect(store).to receive(:search_by_name).with(query).and_return(results)
+        allow(store).to receive(:search_by_name).with(query).and_return(results)
         expect(command.execute).to eq(results)
       end
     end
