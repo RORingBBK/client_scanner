@@ -17,8 +17,8 @@ RSpec.describe Presenters::SearchPresenter, type: :presenter do
     context "when results contains clients" do
       let(:results) do
         [
-          { name: "John Doe", email: "test@hola.com" },
-          { name: "Jane", email: "jane@hola.com" }
+          { full_name: "John Doe", email: "test@hola.com" },
+          { full_name: "Jane", email: "jane@hola.com" }
         ]
       end
       let(:expected_output) do
