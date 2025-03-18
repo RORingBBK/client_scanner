@@ -6,14 +6,15 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
-  gem "rake", "~> 13.0"
-  gem "rubocop", "~> 1.21"
-  gem "rubocop-rake", "~> 0.1"
-  gem "rubocop-rspec", "~> 3.0"
-  gem "ruby-lsp", "~> 0.1"
+  gem "debug",              "~> 1.0"
+  gem "rake",               "~> 13.0"
+  gem "rubocop",            "~> 1.21"
+  gem "rubocop-rake",       "~> 0.1"
+  gem "rubocop-rspec",      "~> 3.0"
+  gem "ruby-lsp",           "~> 0.1"
 end
 
 group :test do
-  gem "rspec", "~> 3.0"
-  gem "simplecov", "~> 0.21", require: false
+  gem "rspec",              "~> 3.0"
+  gem "simplecov",          "~> 0.21", require: false
 end
