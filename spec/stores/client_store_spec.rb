@@ -101,9 +101,15 @@ RSpec.describe Stores::ClientStore, type: :store do
     end
 
     context "when duplicate email is found" do
+      let(:expected_results) do
+        [
+          { full_name: "John Doe", email: "john@example.com" },
+          { full_name: "John Second", email: "john@example.com" }
+        ]
+      end
       let(:email) { "john@example.com" }
 
-      it { is_expected.to eq([{ full_name: "John Doe", email: "john@example.com" }, { full_name: "John Second", email: "john@example.com" }]) }
+      it { is_expected.to eq(expected_results) }
     end
 
     context "when single email is found" do
