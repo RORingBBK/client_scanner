@@ -23,5 +23,12 @@ module Stores
     def search_by_name(query)
       @data.select { |record| record[:full_name].to_s.downcase.include?(query.to_s.downcase) }
     end
+
+    def detect_duplicate_email(query)
+      duplicates = @data.group_by { |record| record[:email] }
+                        .fetch(query, [])
+
+      duplicates.size > 1 ? duplicates : []
+    end
   end
 end
