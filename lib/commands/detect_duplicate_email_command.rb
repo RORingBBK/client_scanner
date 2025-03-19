@@ -1,4 +1,4 @@
-# frozed_string_literal: true
+# frozen_string_literal: true
 
 module Commands
   class DetectDuplicateEmailCommand < BaseCommand
