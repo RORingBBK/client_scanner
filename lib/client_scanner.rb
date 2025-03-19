@@ -50,6 +50,8 @@ module ClientScanner
 
       @parser.on("-e EMAIL", "--email EMAIL", "Search for duplicates email") do |query|
         @options[:search] = query
+        @search_command = Commands::DetectDuplicateEmailCommand
+        @presenter = Presenters::DetectDuplicateEmailPresenter
       end
     end
 
