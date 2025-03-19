@@ -20,11 +20,15 @@ module ClientScanner
       parser: OptionParser.new,
       store_class: Stores::ClientStore,
       search_command: Commands::SearchCommand,
+      detect_duplicate_email_command: Commands::DetectDuplicateEmailCommand,
+      detect_duplicate_email_presenter: Presenters::DetectDuplicateEmailPresenter,
       presenter: Presenters::SearchPresenter
     )
       @parser = parser
       @store_class = store_class
       @search_command = search_command
+      @detect_duplicate_email_command = detect_duplicate_email_command
+      @detect_duplicate_email_presenter = detect_duplicate_email_presenter
       @presenter = presenter
       @options = {}
     end
@@ -59,9 +63,7 @@ module ClientScanner
 
     def add_email_option
       @parser.on("-e EMAIL", "--email EMAIL", "Search for duplicates email") do |query|
-        @options[:search] = query
-        @search_command = Commands::DetectDuplicateEmailCommand
-        @presenter = Presenters::DetectDuplicateEmailPresenter
+        @options[:email] = query
       end
     end
 
@@ -69,16 +71,20 @@ module ClientScanner
       file_path = @options[:file] || "data/clients.json"
       store = @store_class.new(file_path)
 
-      if @options[:search]
-        execute_search(store)
-      else
-        puts @parser
-      end
+      execute_search(store) if @options[:search]
+      execute_email_search(store) if @options[:email]
+
+      puts @parser if @options.empty?
     end
 
     def execute_search(store)
       results = @search_command.new(store, @options[:search]).execute
       puts @presenter.new(results).present
+    end
+
+    def execute_email_search(store)
+      results = @detect_duplicate_email_command.new(store, @options[:email]).execute
+      puts @detect_duplicate_email_presenter.new(results).present
     end
   end
 end

@@ -1,4 +1,5 @@
 [
   { "id": 1, "full_name": "John Doe", "email": "john@example.com" },
-  { "id": 2, "full_name": "Tim Tam", "email": "tam@example.com" }
+  { "id": 2, "full_name": "Tim Tam", "email": "tam@example.com" },
+  { "id": 3, "full_name": "Ram Tam", "email": "ram@example.com" }
 ]
