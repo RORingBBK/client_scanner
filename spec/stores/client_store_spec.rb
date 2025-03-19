@@ -84,4 +84,44 @@ RSpec.describe Stores::ClientStore, type: :store do
       it { is_expected.to eq([]) }
     end
   end
+
+  describe "#detect_duplicate_email" do
+    subject { store.detect_duplicate_email(email) }
+
+    let(:data) do
+      [
+        { full_name: "John Doe", email: "john@example.com" },
+        { full_name: "John Second", email: "john@example.com" },
+        { full_name: "John Invalid", email: "john_next@example.com" }
+      ]
+    end
+
+    before do
+      store.instance_variable_set(:@data, data)
+    end
+
+    context "when duplicate email is found" do
+      let(:expected_results) do
+        [
+          { full_name: "John Doe", email: "john@example.com" },
+          { full_name: "John Second", email: "john@example.com" }
+        ]
+      end
+      let(:email) { "john@example.com" }
+
+      it { is_expected.to eq(expected_results) }
+    end
+
+    context "when single email is found" do
+      let(:email) { "john_next@example.com" }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context "when the email is not found" do
+      let(:email) { "invalid" }
+
+      it { is_expected.to eq([]) }
+    end
+  end
 end
