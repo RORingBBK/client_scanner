@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Commands
+  # DetectDuplicateEmailCommand is responsible for executing a command
+  # to detect clients with duplicate email addresses.
   class DetectDuplicateEmailCommand < BaseCommand
     def initialize(store, query)
       super(store)
