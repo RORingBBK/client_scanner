@@ -24,6 +24,22 @@ RSpec.describe ClientScanner do
     end
   end
 
+  describe "when running the CLI with search query and email" do
+    let(:output) do
+      <<~OUTPUT
+        Found 2 results:
+        - Tim Tam (tam@example.com)
+        - Ram Tam (ram@example.com)
+        No duplicates email found
+      OUTPUT
+    end
+
+    it "outputs the search results" do
+      result = `bin/client_scanner --email john@example.com --search Tam --file #{file_path}`
+      expect(result).to include(output)
+    end
+  end
+
   describe "when file does not exist" do
     it "outputs an error message" do
       result = `bin/client_scanner --search John --file invalid.json`
