@@ -5,6 +5,8 @@ require "debug"
 require_relative "client_scanner/version"
 require_relative "stores/client_store"
 require_relative "commands/search_command"
+require_relative "commands/detect_duplicate_email_command"
+require_relative "presenters/detect_duplicate_email_presenter"
 require_relative "presenters/search_presenter"
 
 module ClientScanner
@@ -43,6 +45,10 @@ module ClientScanner
       end
 
       @parser.on("-s FIELD QUERY", "--search QUERY", "Search for a query") do |query|
+        @options[:search] = query
+      end
+
+      @parser.on("-e EMAIL", "--email EMAIL", "Search for duplicates email") do |query|
         @options[:search] = query
       end
     end
