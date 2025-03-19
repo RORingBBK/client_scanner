@@ -37,6 +37,7 @@ RSpec.describe ClientScanner do
         Usage: bin/client_scanner [options]
             -f, --file FILE                  Path to the file
             -s, --search QUERY               Search for a query
+            -e, --email EMAIL                Search for duplicates email
       USAGE
     end
 
