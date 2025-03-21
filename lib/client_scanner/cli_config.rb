@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "optparse"
+require_relative "../models/client"
 require_relative "../stores/client_store"
 require_relative "../commands/search_command"
 require_relative "../commands/detect_duplicate_email_command"

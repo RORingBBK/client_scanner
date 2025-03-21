@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "base_command"
+
 module Commands
   # DetectDuplicateEmailCommand is responsible for executing a command
   # to detect clients with duplicate email addresses.

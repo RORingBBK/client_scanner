@@ -19,8 +19,8 @@ RSpec.describe Presenters::DetectDuplicateEmailPresenter, type: :presenter do
     context "when results contains clients" do
       let(:results) do
         [
-          { full_name: "John Doe", email: "test@hola.com" },
-          { full_name: "Jane", email: "jane@hola.com" }
+          Client.new(9, "John Doe", "test@hola.com"),
+          Client.new(8, "Jane", "jane@hola.com")
         ]
       end
       let(:expected_output) do

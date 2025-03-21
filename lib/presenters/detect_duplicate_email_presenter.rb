@@ -12,7 +12,7 @@ module Presenters
       return "No duplicates email found" if @results.nil? || @results&.empty?
 
       output = "Found #{@results.size} clients with same email\n"
-      @results.each { |client| output << "- #{client[:full_name]} (#{client[:email]})\n" }
+      @results.each { |client| output << "- #{client.full_name_with_email}\n" }
 
       output
     end
