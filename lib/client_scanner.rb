@@ -5,6 +5,8 @@ require_relative "client_scanner/version"
 require_relative "client_scanner/cli_config"
 
 module ClientScanner
+  FILE_PATH = "data/clients.json"
+
   class Error < StandardError; end
 
   # CLI is the main entry point for the client scanner application
@@ -29,15 +31,8 @@ module ClientScanner
     def setup_parser
       @config.parser.banner = "Usage: bin/client_scanner [options]"
 
-      add_file_option
       add_search_option
       add_email_option
-    end
-
-    def add_file_option
-      @config.parser.on("-f FILE", "--file FILE", "Path to the file") do |file|
-        @options[:file] = file
-      end
     end
 
     def add_search_option
@@ -53,8 +48,7 @@ module ClientScanner
     end
 
     def process_options
-      file_path = @options[:file] || "data/clients.json"
-      store = @config.store_class.new(file_path)
+      store = @config.store_class.new(FILE_PATH)
 
       execute_command(:search, store, @options[:search]) if @options[:search]
       execute_command(:email, store, @options[:email]) if @options[:email]
