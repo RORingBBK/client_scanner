@@ -65,7 +65,7 @@ RSpec.describe Stores::ClientStore, type: :store do
   end
 
   describe "#search_by_name" do
-    subject { store.search_by_name(name) }
+    subject(:search_name) { store.search_by_name(name) }
 
     let(:data) do
       [
@@ -81,8 +81,8 @@ RSpec.describe Stores::ClientStore, type: :store do
       let(:name) { "John" }
 
       it "returns name and email" do
-        expect(subject[0].name).to eq(data[0].name)
-        expect(subject[0].email).to eq(data[0].email)
+        expect(search_name[0].name).to eq(data[0].name)
+        expect(search_name[0].email).to eq(data[0].email)
       end
     end
 
@@ -90,8 +90,8 @@ RSpec.describe Stores::ClientStore, type: :store do
       let(:name) { "john" }
 
       it "returns name and email" do
-        expect(subject[0].name).to eq(data[0].name)
-        expect(subject[0].email).to eq(data[0].email)
+        expect(search_name[0].name).to eq(data[0].name)
+        expect(search_name[0].email).to eq(data[0].email)
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe Stores::ClientStore, type: :store do
   end
 
   describe "#detect_duplicate_email" do
-    subject { store.detect_duplicate_email(email) }
+    subject(:detect_email) { store.detect_duplicate_email(email) }
 
     let(:data) do
       [
@@ -127,13 +127,13 @@ RSpec.describe Stores::ClientStore, type: :store do
       let(:email) { "john@example.com" }
 
       it "returns name" do
-        expect(subject[0].name).to eq(expected_results[0].name)
-        expect(subject[0].name).to eq(expected_results[0].name)
+        expect(detect_email[0].name).to eq(expected_results[0].name)
+        expect(detect_email[0].name).to eq(expected_results[0].name)
       end
 
       it "returns email" do
-        expect(subject[1].email).to eq(expected_results[1].email)
-        expect(subject[1].email).to eq(expected_results[1].email)
+        expect(detect_email[1].email).to eq(expected_results[1].email)
+        expect(detect_email[1].email).to eq(expected_results[1].email)
       end
     end
 
