@@ -19,7 +19,7 @@ module Stores
     end
 
     def detect_duplicate_email(query)
-      duplicates = @data.group_by { |record| record.email }
+      duplicates = @data.group_by(&:email)
                         .fetch(query, [])
 
       duplicates.size > 1 ? duplicates : []
