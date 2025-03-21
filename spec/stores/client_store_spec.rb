@@ -4,6 +4,14 @@ RSpec.describe Stores::ClientStore, type: :store do
   subject(:store) { described_class.new(file_path) }
 
   let(:file_path) { "data/clients.json" }
+  # Assumption: Uses factories for models
+  let(:client) do
+    Client.new(
+      1,
+      "John Doe",
+      "john@example.com"
+    )
+  end
 
   describe "#load_data" do
     context "when the file exists" do
@@ -22,7 +30,10 @@ RSpec.describe Stores::ClientStore, type: :store do
       end
 
       it "loads the data and parse it as JSON" do
-        expect(store.instance_variable_get(:@data)).to eq([{ full_name: "John Doe", email: "john@example.com" }])
+        expect(store.instance_variable_get(:@data).first).to have_attributes(
+          name: "John Doe",
+          email: "john@example.com"
+        )
       end
     end
 
@@ -58,7 +69,7 @@ RSpec.describe Stores::ClientStore, type: :store do
 
     let(:data) do
       [
-        { full_name: "John Doe", email: "john@example.com" }
+        Client.new(nil, "John Doe", "john@example.com")
       ]
     end
 
@@ -69,13 +80,19 @@ RSpec.describe Stores::ClientStore, type: :store do
     context "when the name is found" do
       let(:name) { "John" }
 
-      it { is_expected.to eq([{ full_name: "John Doe", email: "john@example.com" }]) }
+      it "returns name and email" do
+        expect(subject[0].name).to eq(data[0].name)
+        expect(subject[0].email).to eq(data[0].email)
+      end
     end
 
     context "when name is case insensitive" do
       let(:name) { "john" }
 
-      it { is_expected.to eq([{ full_name: "John Doe", email: "john@example.com" }]) }
+      it "returns name and email" do
+        expect(subject[0].name).to eq(data[0].name)
+        expect(subject[0].email).to eq(data[0].email)
+      end
     end
 
     context "when the name is not found" do
@@ -90,9 +107,9 @@ RSpec.describe Stores::ClientStore, type: :store do
 
     let(:data) do
       [
-        { full_name: "John Doe", email: "john@example.com" },
-        { full_name: "John Second", email: "john@example.com" },
-        { full_name: "John Invalid", email: "john_next@example.com" }
+        Client.new(nil, "John Doe", "john@example.com"),
+        Client.new(nil, "John Second", "john@example.com"),
+        Client.new(nil, "John Invalid", "john_next@example.com")
       ]
     end
 
@@ -103,13 +120,21 @@ RSpec.describe Stores::ClientStore, type: :store do
     context "when duplicate email is found" do
       let(:expected_results) do
         [
-          { full_name: "John Doe", email: "john@example.com" },
-          { full_name: "John Second", email: "john@example.com" }
+          Client.new(nil, "John Doe", "john@example.com"),
+          Client.new(nil, "John Second", "john@example.com")
         ]
       end
       let(:email) { "john@example.com" }
 
-      it { is_expected.to eq(expected_results) }
+      it "returns name" do
+        expect(subject[0].name).to eq(expected_results[0].name)
+        expect(subject[0].name).to eq(expected_results[0].name)
+      end
+
+      it "returns email" do
+        expect(subject[1].email).to eq(expected_results[1].email)
+        expect(subject[1].email).to eq(expected_results[1].email)
+      end
     end
 
     context "when single email is found" do
