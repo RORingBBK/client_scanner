@@ -4,7 +4,6 @@ RSpec.describe Stores::ClientStore, type: :store do
   subject(:store) { described_class.new(file_path) }
 
   let(:file_path) { "data/clients.json" }
-  # Assumption: Uses factories for models
   let(:client) do
     Client.new(
       1,
