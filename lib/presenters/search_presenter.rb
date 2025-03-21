@@ -12,7 +12,7 @@ module Presenters
       return "No clients found" if @results.nil? || @results&.empty?
 
       output = "Found #{@results.count} results:\n"
-      @results.each { |client| output << "- #{client[:full_name]} (#{client[:email]})\n" }
+      @results.each { |client| output << "- #{client.full_name_with_email}\n" }
 
       output
     end
