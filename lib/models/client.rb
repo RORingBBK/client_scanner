@@ -10,4 +10,7 @@ class Client
     @email = email
   end
 
+  def full_name_with_email
+    "#{name} (#{email})"
+  end
 end
