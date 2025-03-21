@@ -1,4 +1,4 @@
-# frozen_string_lieral: true
+# frozen_string_literal: true
 
 # Client represents a client entity with an id, name, and email.
 class Client
